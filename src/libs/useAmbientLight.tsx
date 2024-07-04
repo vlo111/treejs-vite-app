@@ -2,14 +2,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 const useAmbientLight = (color: number, intensity: number) => {
-    const light = useRef<THREE.AmbientLight>();
+    const light = useRef<THREE.AmbientLight>(new THREE.AmbientLight(color, intensity));
 
     useEffect(() => {
-        light.current = new THREE.AmbientLight(color, intensity);
         return () => {
-            if (light.current) {
-                light.current.dispose();
-            }
+            light.current.dispose();
         };
     }, [color, intensity]);
 

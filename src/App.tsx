@@ -1,19 +1,18 @@
-// App.tsx
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import useThreeScene from './libs/useThreeScene';
 import useAmbientLight from './libs/useAmbientLight';
 import useDirectionalLight from './libs/useDirectionalLight';
 import useMovingCamera from './libs/useMovingCamera';
-import useCarModels from "./libs/useCarModel.tsx";
+import useCarModels from './libs/useCarModels';
 
 const App: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const models = useCarModels();
     const scene = useThreeScene();
+    const ambientLight = useAmbientLight(0xffffff, 0.5);
+    const directionalLight = useDirectionalLight(0xffffff, 0.5, new THREE.Vector3(0, 10, 10));
     const camera = useMovingCamera();
-    const ambientLight = useAmbientLight(0xffffff, 0.5); // White ambient light
-    const directionalLight = useDirectionalLight(0xffffff, 0.5, new THREE.Vector3(0, 10, 10)); // White directional light
+    const models = useCarModels();
 
     useEffect(() => {
         if (!containerRef.current || models.length === 0 || !ambientLight || !directionalLight || !camera) return;
@@ -23,7 +22,6 @@ const App: React.FC = () => {
         renderer.setClearColor(0xffffff); // Set background color to white
         containerRef.current.appendChild(renderer.domElement);
 
-        // Add grid helper to the scene
         const gridHelper = new THREE.GridHelper(100, 100);
         scene.add(gridHelper);
 
@@ -39,7 +37,6 @@ const App: React.FC = () => {
         animate();
 
         return () => {
-            // Clean up Three.js resources
             renderer.dispose();
             scene.traverse((object) => {
                 if (object instanceof THREE.Mesh) {
@@ -47,10 +44,10 @@ const App: React.FC = () => {
                     object.material.dispose();
                 }
             });
-            // Clean up camera resources if needed
+            // Optionally clean up camera resources if needed
             // Example: camera.dispose();
         };
-    }, [models, ambientLight, directionalLight, camera]); // Include camera in the dependency array
+    }, [models, ambientLight, directionalLight, camera]);
 
     return <div ref={containerRef} />;
 };

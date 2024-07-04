@@ -1,4 +1,3 @@
-// useCarModel.tsx
 import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -15,14 +14,16 @@ const useCarModels = () => {
                 path,
                 (gltf) => {
                     console.log('GLTF loaded:', gltf);
-                    const model = gltf.scene as THREE.Group;
-                    model.position.set(index * 5, 0, 0); // Position the models differently
+                    const model = gltf.scene;
+                    model.position.set(index * 5, 0, 0); // Position models differently
                     loadedModels.push(model);
                     if (loadedModels.length === 2) {
                         setModels(loadedModels);
                     }
                 },
-                undefined,
+                (xhr) => {
+                    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+                },
                 (error) => {
                     console.error(`An error happened while loading ${path}`, error);
                 }
@@ -30,7 +31,6 @@ const useCarModels = () => {
         });
 
         return () => {
-            // Clean up models if needed
             loadedModels.forEach((model) => {
                 model.traverse((object) => {
                     if (object instanceof THREE.Mesh) {

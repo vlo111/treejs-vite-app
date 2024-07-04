@@ -1,4 +1,3 @@
-// useThreeScene.ts
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -7,7 +6,6 @@ const useThreeScene = () => {
 
     useEffect(() => {
         return () => {
-            // Clean up scene resources
             scene.current.traverse((object) => {
                 if (object instanceof THREE.Mesh) {
                     object.geometry.dispose();
@@ -15,7 +13,7 @@ const useThreeScene = () => {
                 }
             });
         };
-    }, [scene]);
+    }, []);
 
     return scene.current;
 };

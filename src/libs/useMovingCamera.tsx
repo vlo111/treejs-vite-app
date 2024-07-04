@@ -1,23 +1,20 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'; // Import OrbitControls from correct path
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const useMovingCamera = () => {
     const camera = useRef<THREE.PerspectiveCamera>(new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000));
     const controls = useRef<OrbitControls>();
 
     useEffect(() => {
-        camera.current.position.set(0, 5, 10); // Initial position
+        camera.current.position.set(0, 5, 10);
         controls.current = new OrbitControls(camera.current, document.body);
-        controls.current.target.set(0, 0, 0); // Set camera target
+        controls.current.target.set(0, 0, 0);
 
         const animate = () => {
-            if (controls.current) {
-                controls.current.update(); // Update controls if defined
-            }
+            controls.current?.update(); // Ensure controls exist before updating
         };
 
-        // Add animate function to the render loop
         const renderLoop = () => {
             requestAnimationFrame(renderLoop);
             animate();
@@ -26,10 +23,7 @@ const useMovingCamera = () => {
         renderLoop();
 
         return () => {
-            // Clean up resources
-            if (controls.current) {
-                controls.current.dispose();
-            }
+            controls.current?.dispose(); // Dispose controls on unmount
         };
     }, []);
 
