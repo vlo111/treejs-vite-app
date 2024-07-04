@@ -23,6 +23,10 @@ const App: React.FC = () => {
         renderer.setClearColor(0xffffff); // Set background color to white
         containerRef.current.appendChild(renderer.domElement);
 
+        // Add grid helper to the scene
+        const gridHelper = new THREE.GridHelper(100, 100);
+        scene.add(gridHelper);
+
         scene.add(ambientLight);
         scene.add(directionalLight);
         models.forEach(model => scene.add(model));
