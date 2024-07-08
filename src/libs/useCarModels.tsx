@@ -9,17 +9,15 @@ const useCarModels = () => {
         const loader = new GLTFLoader();
         const loadedModels: THREE.Group[] = [];
 
-        ['/models/gltf/scene.gltf', '/models/gltf/scene1.glb'].forEach((path, index) => {
+        ['/models/gltf/dron/scene.gltf'].forEach((path, index) => {
             loader.load(
                 path,
                 (gltf) => {
                     console.log('GLTF loaded:', gltf);
                     const model = gltf.scene;
-                    model.position.set(index * 5, 0, 0); // Position models differently
+                    model.position.set(0, 0, 0); // Position models differently
                     loadedModels.push(model);
-                    if (loadedModels.length === 2) {
-                        setModels(loadedModels);
-                    }
+                    setModels(loadedModels);
                 },
                 (xhr) => {
                     console.log((xhr.loaded / xhr.total) * 100 + '% loaded');

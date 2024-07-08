@@ -1,0 +1,11 @@
+Model Information:
+* title:	Wrench matal - 8MB
+* source:	https://sketchfab.com/3d-models/wrench-matal-8mb-ed28b6c5400740909f6de2654d2ef71c
+* author:	Mehdi Shahsavan (https://sketchfab.com/ahmagh2e)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Wrench matal - 8MB" (https://sketchfab.com/3d-models/wrench-matal-8mb-ed28b6c5400740909f6de2654d2ef71c) by Mehdi Shahsavan (https://sketchfab.com/ahmagh2e) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
